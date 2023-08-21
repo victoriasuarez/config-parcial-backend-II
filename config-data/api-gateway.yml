@@ -1,0 +1,51 @@
+server:
+  port: ${PORT:${SERVER_PORT:8080}}
+
+spring:
+  application:
+    name: ms-gateway
+    cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      routes:
+        - id: ms-bill
+          uri: lb://ms-bill
+          predicates:
+            - Path=/bills/**
+
+info:
+  app:
+    name: ${spring.application.name}
+
+    security:
+    oauth2:
+      client:
+        provider:
+          keycloak-provider:
+            issuer-uri: http://localhost:8080/realms/parcial-suarez-victoria
+        registration:
+          api-gateway-service:
+            provider: keycloak-provider
+            client-id: api-gateway-client
+            client-secret: ovDBvccwD3eG50ReXD0O2i1aFnIV24Ah
+            scope:
+              - openid
+            authorization-grant-type: authorization_code
+            redirect-uri: 'http://localhost:8090/login/oauth2/code/keycloak'
+
+
+  eureka:
+    client:
+      registerWithEureka: false
+      fetchRegistry: true
+      serviceURL:
+        defaultZone: http://localhost:8761/eureka
+  management:
+    endpoint:
+      gateway:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: gateway
