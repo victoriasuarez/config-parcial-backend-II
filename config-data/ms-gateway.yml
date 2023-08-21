@@ -14,11 +14,7 @@ spring:
           predicates:
             - Path=/bills/**
 
-info:
-  app:
-    name: ${spring.application.name}
-
-    security:
+  security:
     oauth2:
       client:
         provider:
@@ -34,7 +30,6 @@ info:
             authorization-grant-type: authorization_code
             redirect-uri: 'http://localhost:8090/login/oauth2/code/keycloak'
 
-
   eureka:
     client:
       registerWithEureka: false
@@ -49,3 +44,9 @@ info:
       web:
         exposure:
           include: gateway
+
+
+
+info:
+  app:
+    name: ${spring.application.name}
