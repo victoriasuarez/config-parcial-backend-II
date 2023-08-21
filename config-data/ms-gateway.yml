@@ -25,7 +25,7 @@ info:
           keycloak-provider:
             issuer-uri: http://localhost:8080/realms/parcial-suarez-victoria
         registration:
-          api-gateway-service:
+          ms-gateway:
             provider: keycloak-provider
             client-id: api-gateway-client
             client-secret: ovDBvccwD3eG50ReXD0O2i1aFnIV24Ah
