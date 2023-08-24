@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: ms-gateway
-    cloud:
+  cloud:
     gateway:
       default-filters:
         - TokenRelay
